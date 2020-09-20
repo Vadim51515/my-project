@@ -7,7 +7,7 @@ const Profile = () => {
             <img src='https://bigenc.ru/media/2016/10/27/1235208547/19117.jpg'></img>
             <div className={styles.profil}>
                 <div className={styles.norka}>
-                    <img src='https://lh3.googleusercontent.com/proxy/_NULpCBuedgoJm2af96YEDch5HjAQmWD8XFJ9Z9AQE7GmwhdihHio6iQkT7gpdDSOrB9_fDXDjX5zUuubuczdpFeLwkftyyOPV7vz4d41FY-_83SMPiU-Q'></img>
+                    <img src='https://lh3.googleusercontent.com/proxy/As8JdSCx2yY63YwJvzZslWH_in2ySlHGpAL1RTXla9Q0DXJJgxqRXdFV134bL6IKL__W_1tAC0Cr1vMbJOAih_SjrcieEvjxt9QXthJqn3-1In5iyCb-Qg'></img>
                 </div>
                 <div className={styles.anket}>
                     <h3>Vadim Pushkin</h3>
