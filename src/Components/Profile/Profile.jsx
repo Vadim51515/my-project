@@ -1,7 +1,7 @@
 import React from 'react';
 import MyPosts from './MyPosts/MyPosts';
 import styles from './Profile.module.css';
-const Profile = () => {
+const Profile = (props) => {
     return (
         <div className={styles.content}>
             <img src='https://bigenc.ru/media/2016/10/27/1235208547/19117.jpg'></img>
@@ -17,7 +17,11 @@ const Profile = () => {
                     <p> Web Site: http://da-da i</p>
                 </div>
             </div>
-            <MyPosts />
+            <div>
+                <input type='text'></input>
+                <button>Add post</button>
+            </div>
+            <MyPosts postData={props.state.postData}  />
         </div>
     )
 }
