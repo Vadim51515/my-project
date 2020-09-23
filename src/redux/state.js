@@ -26,7 +26,13 @@ let state = {
             { id: "valera", name: "Valera" },
             { id: "sveta", name: "Sveta" },
         ],
+    },
+    friends:{
+        nameFriends:[
+            {id: 1,name: "Vadim"},
+            {id: 1,name: "Nikita"},
+            {id: 1,name: "Filin"},
+        ]
     }
-
 }
 export default state
