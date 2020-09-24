@@ -15,3 +15,6 @@
 .active{
   color: rgb(11, 184, 112);
 }
+.namesFriends{
+  display: flex;
+}

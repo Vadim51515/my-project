@@ -17,10 +17,6 @@ const Profile = (props) => {
                     <p> Web Site: http://da-da i</p>
                 </div>
             </div>
-            <div>
-                <input type='text'></input>
-                <button>Add post</button>
-            </div>
             <MyPosts postData={props.state.postData}  />
         </div>
     )
