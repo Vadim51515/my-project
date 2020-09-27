@@ -17,7 +17,11 @@ const Profile = (props) => {
                     <p> Web Site: http://da-da i</p>
                 </div>
             </div>
-            <MyPosts postData={props.state.postData}  />
+            <MyPosts 
+                postData={props.profilePage.postData} 
+                addPost={props.addPost} 
+                newPostText={props.profilePage.newPostText} 
+                updateNewPostText={props.updateNewPostText}/>
         </div>
     )
 }

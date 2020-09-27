@@ -1,3 +1,5 @@
+
+import { rerenderEntiteTree } from './../render';
 let state = {
     profilePage: {
         postData: [
@@ -7,6 +9,7 @@ let state = {
             { id: 1, message: "Кто я?", like: 515 },
             { id: 1, message: "Я каменьщик работаю 3 дня", like: 123 },
         ],
+        newPostText:"Im da da"
        
     },
     dialogsPage: {
@@ -34,5 +37,21 @@ let state = {
             {id: 1,name: "Filin"},
         ]
     }
+}
+window.state = state
+export let addPost = () =>{
+    let newPost = {
+        id:5,
+        message:state.profilePage.newPostText,
+        like:0
+    }
+    state.profilePage.postData.push(newPost)
+    state.profilePage.newPostText =" "
+    rerenderEntiteTree(state)
+}
+
+export let updateNewPostText = (newText) =>{
+    state.profilePage.newPostText = newText
+    rerenderEntiteTree(state)
 }
 export default state
