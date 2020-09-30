@@ -10,12 +10,14 @@ const MyPosts = (props) => {
     let newPostsElement = React.createRef()
 
 let addPost = () => {
-    let text = newPostsElement.current.value
-    props.addPost(text)
+    props.dispatch({type:"ADD-POST"})
     }
 let onPostChange = () =>{
     let text = newPostsElement.current.value
-   props.updateNewPostText(text)
+   props.dispatch({
+       type: "UPDATE-NEW-POST-TEXT",
+       newText: text
+    })
 }
     return (
         <div className={styles.posts}>
