@@ -10,7 +10,6 @@ import Music from './Components/Music/Music';
 import Setings from './Components/Setings/Setings';
 const App = (props) => {
   return (
-    <BrowserRouter>
       <div className="full">
         <Header />
         <NavBar state={props.state.friends} />
@@ -18,14 +17,15 @@ const App = (props) => {
           <Route path='/profile' render={() => <Profile 
               profilePage={props.state.profilePage}
               dispatch={props.dispatch}/>} />
-          <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>} />
+          <Route path='/dialogs' render={() => <Dialogs 
+          state={props.state.dialogsPage} 
+          dispatch={props.dispatch}/>} />
           <Route path='/news' render={() => <News />} />
           <Route path='/music' render={() => <Music />} />
           <Route path='/setings' render={() => <Setings />} />
         </div>
       </div>
-    </BrowserRouter>
-  );
+  );    
 }
 
-export default App;
+export default App; 
