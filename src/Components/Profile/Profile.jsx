@@ -2,6 +2,7 @@ import React from 'react';
 import MyPosts from './MyPosts/MyPosts';
 import styles from './Profile.module.css';
 const Profile = (props) => {
+    debugger
     return (     
         <div className={styles.content}>
             <img src='https://bigenc.ru/media/2016/10/27/1235208547/19117.jpg'></img>
