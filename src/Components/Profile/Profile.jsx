@@ -1,8 +1,8 @@
 import React from 'react';
 import MyPosts from './MyPosts/MyPosts';
 import styles from './Profile.module.css';
+import MyPostsContainer from './MyPosts/MyPostsContainer';
 const Profile = (props) => {
-    debugger
     return (     
         <div className={styles.content}>
             <img src='https://bigenc.ru/media/2016/10/27/1235208547/19117.jpg'></img>
@@ -18,10 +18,9 @@ const Profile = (props) => {
                     <p> Web Site: http://da-da i</p>
                 </div>
             </div>
-            <MyPosts 
-                postData={props.profilePage.postData} 
-                newPostText={props.profilePage.newPostText} 
-                dispatch={props.dispatch}/>
+            <MyPostsContainer 
+                store={props.store}
+                />
         </div>
     )
 }

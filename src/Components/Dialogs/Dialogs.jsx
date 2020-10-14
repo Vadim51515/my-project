@@ -4,19 +4,18 @@ import Message from './Message/Message';
 import DialogItem from './DialogItem/DialogItem';
 import { addMessageActionCreator, ubdateNewMessagetActionCreator } from '../../redux/Dialogs_Reducer';
 const Dialogs = (props) => {
-    let DialogsElements = props.state.DialogsData.map( d =>
+    let DialogsElements = props.DialogsData.map( d =>
         <DialogItem name={d.name} id={d.id} />
     )
-    let MessagesElements = props.state.MessageData.map(m =>
+    let MessagesElements = props.MessageData.map(m =>
         <Message message={m.message} />)
 
-        let addMessage = () =>{
-            props.dispatch(addMessageActionCreator())
+        let OnAddMessage = () =>{
+            props.addMessage()
         }
         let onMessageChange = (e) =>{
             let text = e.target.value
-            let action = ubdateNewMessagetActionCreator(text)
-            props.dispatch(action)
+            props.ubdateNewMessagetActionCreator(text)
         }
 return (
     <div className={styles.dialogs}>
@@ -27,9 +26,9 @@ return (
         <div className={styles.messages}>
             {MessagesElements}
         <div>
-            <textarea  onChange={onMessageChange}  value={props.state.newMessageText}></textarea>
+            <textarea  onChange={onMessageChange}  value={props.newMessageText}></textarea>
         </div>
-        <button onClick={addMessage}>Add message</button>
+        <button onClick={OnAddMessage}>Add message</button>
         </div>
 
     </div>

@@ -8,6 +8,7 @@ import Profile from './Components/Profile/Profile';
 import News from './Components/News/News';
 import Music from './Components/Music/Music';
 import Setings from './Components/Setings/Setings';
+import DialogsContainer from './Components/Dialogs/DialogsContainer';
 const App = (props) => {
   return (
       <div className="full">
@@ -15,11 +16,9 @@ const App = (props) => {
         <NavBar state={props.state.friends} />
         <div className='content'>
           <Route path='/profile' render={() => <Profile 
-              profilePage={props.state.profilePage}
-              dispatch={props.dispatch}/>} />
-          <Route path='/dialogs' render={() => <Dialogs 
-          state={props.state.dialogsPage} 
-          dispatch={props.dispatch}/>} />
+            store={props.store}/>} />
+          <Route path='/dialogs' render={() => <DialogsContainer 
+          store={props.store}/>} />
           <Route path='/news' render={() => <News />} />
           <Route path='/music' render={() => <Music />} />
           <Route path='/setings' render={() => <Setings />} />

@@ -1,7 +1,6 @@
 const ADD_MESSAGE = "ADD-MESSAGE"
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
 let initialState ={
-    dialogsPage: {
         MessageData: [
             { id: 1, message: "Vadim hello" },
             { id: 2, message: "Andrey hello" },
@@ -19,9 +18,8 @@ let initialState ={
             { id: "valera", name: "Valera" },
             { id: "sveta", name: "Sveta" },
         ],
-    },
+    }
 
-}
  const dialogsReducer = (state = initialState, action) =>{
     switch (action.type) {
         case ADD_MESSAGE:
