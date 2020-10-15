@@ -18,9 +18,7 @@ const Profile = (props) => {
                     <p> Web Site: http://da-da i</p>
                 </div>
             </div>
-            <MyPostsContainer 
-                store={props.store}
-                />
+            <MyPostsContainer />
         </div>
     )
 }

@@ -3,6 +3,7 @@ import styles from './MyPosts.module.css';
 import Post from './Post/Post';
 import { addPostActionCreator, ubdateNewPostActionCreator } from './../../../redux/Profile_Reducer';
 const MyPosts = (props) => {
+    debugger
     let postelement = props.postData.map(e =>
         <div>
             <Post message={e.message} like={e.like} />

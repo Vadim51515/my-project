@@ -4,6 +4,7 @@ import Message from './Message/Message';
 import DialogItem from './DialogItem/DialogItem';
 import { addMessageActionCreator, ubdateNewMessagetActionCreator } from '../../redux/Dialogs_Reducer';
 const Dialogs = (props) => {
+
     let DialogsElements = props.DialogsData.map( d =>
         <DialogItem name={d.name} id={d.id} />
     )
@@ -13,7 +14,7 @@ const Dialogs = (props) => {
         let OnAddMessage = () =>{
             props.addMessage()
         }
-        
+
         let onMessageChange = (e) =>{
             let text = e.target.value
             props.ubdateNewMessagetActionCreator(text)
