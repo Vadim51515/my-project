@@ -27,12 +27,16 @@ let initialState ={
                 id:7,
                 message:state.newMessageText
             }
-           state.MessageData.push(newMessage)
-           state.newMessageText =""
-            return state
-        case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.newTextMessage
-            return state
+            let stateCopy = {...state}
+            stateCopy.MessageData = [...state.MessageData]
+            stateCopy.MessageData.push(newMessage)
+            stateCopy.newMessageText =""
+            return stateCopy
+        case UPDATE_NEW_MESSAGE_TEXT:{
+            let stateCopy = {...state}
+            stateCopy.newMessageText = action.newTextMessage
+            return stateCopy
+        }
         default:
             return state
     }

@@ -3,7 +3,6 @@ import styles from './MyPosts.module.css';
 import Post from './Post/Post';
 import { addPostActionCreator, ubdateNewPostActionCreator } from './../../../redux/Profile_Reducer';
 const MyPosts = (props) => {
-    debugger
     let postelement = props.postData.map(e =>
         <div>
             <Post message={e.message} like={e.like} />
@@ -16,7 +15,7 @@ let onAddPost = () => {
     }
 let onPostChange = (e) =>{
     let text = e.target.value
-    props.ubdateNewPostActionCreator(text)
+    props.onPostChange(text)
     // let action = ubdateNewPostActionCreator(text)
     // props.dispatch(action)
 }

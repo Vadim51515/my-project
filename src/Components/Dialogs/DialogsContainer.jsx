@@ -4,7 +4,10 @@ import Dialogs from './Dialogs';
 import { connect } from 'react-redux';
 let mapStateToProps = (state)=>{
     return{
-        DialogsData:state.dialogsPage.DialogsData
+        DialogsData:state.dialogsPage.DialogsData,
+        MessageData:state.dialogsPage.MessageData,
+        newMessageText:state.dialogsPage.newMessageText,
+        
     }
 }
 let mapDispatchToProps = (dispatch)=>{

@@ -4,7 +4,6 @@ import Message from './Message/Message';
 import DialogItem from './DialogItem/DialogItem';
 import { addMessageActionCreator, ubdateNewMessagetActionCreator } from '../../redux/Dialogs_Reducer';
 const Dialogs = (props) => {
-
     let DialogsElements = props.DialogsData.map( d =>
         <DialogItem name={d.name} id={d.id} />
     )
