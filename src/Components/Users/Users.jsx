@@ -8,10 +8,10 @@ const Users = (props) => {
     { photoUrl:"https://cdn.onlinewebfonts.com/svg/img_453102.png", id: 3, followed: true, fullName: "Nasty", status: "Sup navarili", location:{country:"Russia", city: "Tura"} }
 ])
     }
-debugger
+    debugger
     return (
         <div>{
-            props.users .map(u => <div key={u.id}>
+            props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
                         <img url={u.photoUrl}></img>
