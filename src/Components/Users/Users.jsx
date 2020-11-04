@@ -1,20 +1,20 @@
+import * as axios from 'axios';
 import React from 'react';
-
+import StandartUser from "./StandardIconProfile.png"
 const Users = (props) => {
     if(props.users.length === 0){
-    props.setUsers([ 
-    { photoUrl:"https://cdn.onlinewebfonts.com/svg/img_453102.png", id: 1, followed: false, fullName: "Vadim", status: "boss", location:{country:"Russia", city: "Ekaterinburg"} },
-    { photoUrl:"https://cdn.onlinewebfonts.com/svg/img_453102.png", id: 2, followed: true, fullName: "Lia", status: "LOL", location:{country:"Russia", city: "Ekaterinburg"} },
-    { photoUrl:"https://cdn.onlinewebfonts.com/svg/img_453102.png", id: 3, followed: true, fullName: "Nasty", status: "Sup navarili", location:{country:"Russia", city: "Tura"} }
-])
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response=>{
+            props.setUsers(response.data.items)
+        })
+        
     }
-    debugger
+
     return (
         <div>{
             props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
-                        <img url={u.photoUrl}></img>
+                        <img url={u.photos.small !=null? u.photos.small:StandartUser}></img>
                     </div>
                     <div>
                         {u.followed ?  <button onClick={()=>{props.unfollow(u.id)}}>Unfollow</button> :  <button  onClick={()=>{props.follow(u.id)}}>Follow</button> }
@@ -23,7 +23,7 @@ const Users = (props) => {
                 <span>
                     <span>
                         <div>
-                            {u.fullName}
+                            {u.name}
                         </div>
                         <div>
                             {u.status}
@@ -31,10 +31,10 @@ const Users = (props) => {
                     </span>
                     <span>
                         <div>
-                            {u.location.country}
+                            {/* {u.location.country} */}
                         </div>
                         <div>
-                            {u.location.city}
+                            {/* {u.location.city} */}
                         </div>
 
                     </span>
