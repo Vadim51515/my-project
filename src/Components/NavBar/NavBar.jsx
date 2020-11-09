@@ -10,6 +10,7 @@ const NavBar = (props) => {
       <div className={styles.item}><NavLink style={{ textDecoration: 'none' }} activeClassName={styles.active} to='/news'>News</NavLink></div>
       <div className={styles.item}><NavLink style={{ textDecoration: 'none' }} activeClassName={styles.active} to='/music'>Music</NavLink></div>
       <div className={styles.item}><NavLink style={{ textDecoration: 'none' }} activeClassName={styles.active} to='/setings'>Setings</NavLink></div>
+      <div className={styles.item}><NavLink style={{ textDecoration: 'none' }} activeClassName={styles.active} to='/users'>Users</NavLink></div>
       <div><h3>Friends</h3>
         <div className={styles.namesFriends}>
          {/* <Friends /> */}
