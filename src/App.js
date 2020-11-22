@@ -10,13 +10,15 @@ import Music from './Components/Music/Music';
 import Setings from './Components/Setings/Setings';
 import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import UsersContainer from './Components/Users/UsersContainer';
+import ProfileContainer from './Components/Profile/ProfileContainer';
+import HeaderContainer from './Components/Header/HeaderContainer';
 const App = (props) => {
   return (
       <div className="full">
-        <Header />
+        <HeaderContainer />
         <NavBar />
         <div className='content'>
-          <Route path='/profile' render={() => <Profile />} />
+          <Route path='/profile/:userID?' render={() => <ProfileContainer />} />
           <Route path='/dialogs' render={() => <DialogsContainer />} />
           <Route path='/news' render={() => <News />} />
           <Route path='/music' render={() => <Music />} />
