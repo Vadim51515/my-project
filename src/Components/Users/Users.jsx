@@ -1,14 +1,16 @@
 import React from 'react';
+import * as  axios from 'axios';
 import styles from './Users.module.css';
 import StandartUser from "./StandardIconProfile.png"
 import { NavLink } from 'react-router-dom';
+import { usersAPI } from './../../api/api';
 let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-    console.log(props);
+    console.log(  props.users);
     return (
         <div>
         
@@ -34,7 +36,30 @@ let Users = (props) => {
                             </NavLink>
                         </div>
                         <div>
-                            {u.followed ? <button onClick={() => { props.unfollow(u.id) }}>Unfollow</button> : <button onClick={() => { props.follow(u.id) }}>Follow</button>}
+                            {u.followed 
+                            ?<button disabled={props.followingInProgress.some(id => id === u.id )} onClick={() => { 
+                                props.unfollow(u.id)
+                                // props.followingProgress(true, u.id)
+                                // usersAPI.unfollow(u.id).then(resultCode=>{
+                                //     props.followingProgress(false, u.id)
+                                //         if (resultCode === 0){
+                                //             props.unfollow(u.id) 
+                                //         }
+                                //     }
+                                // )
+                                 }}>Unfollow</button>
+                            
+                            : <button disabled={props.followingInProgress.some(id => id === u.id )} onClick={() => {  
+                                props.follow(u.id)
+                            //     props.followingProgress(true, u.id)
+                            //     usersAPI.follow(u.id).then(resultCode=>{
+                            //         props.followingProgress(false, u.id)
+                            //         if (resultCode === 0){
+                            //             props.follow(u.id) 
+                            //         }
+                            //     }
+                            // )
+                            }}>Follow</button>  }
                         </div>
                     </span>
                     <span>
