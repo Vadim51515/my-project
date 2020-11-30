@@ -114,7 +114,9 @@ export const follow = (userId) => {
         )
     }
 }
+export const test = () => ()=>{
 
+}
 export const unfollow = (userId) => {
 
     return (dispatch) => {
