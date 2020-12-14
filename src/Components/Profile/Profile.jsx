@@ -7,6 +7,7 @@ const Profile = (props) => {
     if(!props.profile){
         return <Preloader/>
     }
+    
     return (      
         <div className={styles.content}>
             <img src='https://bigenc.ru/media/2016/10/27/1235208547/19117.jpg'></img>

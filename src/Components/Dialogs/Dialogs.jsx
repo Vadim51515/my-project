@@ -3,6 +3,7 @@ import styles from './Dialogs.module.css';
 import Message from './Message/Message';
 import DialogItem from './DialogItem/DialogItem';
 import { addMessageActionCreator, ubdateNewMessagetActionCreator } from '../../redux/Dialogs_Reducer';
+import { Redirect } from 'react-router-dom';
 const Dialogs = (props) => {
     let DialogsElements = props.DialogsData.map( d =>
         <DialogItem name={d.name} id={d.id} />
@@ -17,6 +18,10 @@ const Dialogs = (props) => {
         let onMessageChange = (e) =>{
             let text = e.target.value
             props.ubdateNewMessagetActionCreator(text)
+        }
+        if(props.isAuth === false){
+            return <Redirect to='./login'></Redirect>
+            
         }
 return (
     <div className={styles.dialogs}>
