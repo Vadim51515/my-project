@@ -32,12 +32,34 @@ export const usersAPI = {
          })
     },
     getProfile(userID){
+        console.error("Используется старый метод");
+        return profileAPI.getProfile(userID)
+    }
+} 
+
+export const profileAPI = {
+    getProfile(userID){
         return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`)
         .then(response => {
             return response
         })
+    },
+    getStatus(userID){
+        
+        return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/status/${userID}`)
+        
+        .then(response => {
+            
+            return response
+        })
+    },
+    updateStatus(status){
+        return instance.put(`https://social-network.samuraijs.com/api/1.0/profile/status`, {status:status})
+        .then(response => {
+            return response
+        })
     }
-}
+} 
 
 export const authAPI ={
     me(){

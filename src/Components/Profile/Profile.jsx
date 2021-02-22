@@ -3,6 +3,7 @@ import MyPosts from './MyPosts/MyPosts';
 import styles from './Profile.module.css';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 import Preloader from './../Common/Preloader/Preloader';
+import ProfileStatus from './ProfileStatus';
 const Profile = (props) => {
     if(!props.profile){
         return <Preloader/>
@@ -16,6 +17,7 @@ const Profile = (props) => {
                     <img src={props.profile.photos.large}></img>
                 </div>
                 <div className={styles.anket}>
+                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                     <h3> {props.profile.fullName}</h3>
                     <div style={{display:"block"}}>
                     <span className={styles.minHeading}>Обо мне:</span> {props.profile.aboutMe}
