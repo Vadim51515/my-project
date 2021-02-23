@@ -10,6 +10,8 @@
   
 .loginBlock{
   float: right;
+  display: flex;
+  
 
 }  
 .loginBlock a{
