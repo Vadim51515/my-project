@@ -1,6 +1,5 @@
 import { usersAPI } from './../api/api';
-const FOLLOW = "FOLLOW"
-const UNFOLLOW = "UNFOLLOW"
+const FOLLOW_UNFOLLOW = "FOLLOW_UNFOLLOW"
 const SET_USERS = "SET_USERS"
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
@@ -17,30 +16,18 @@ let initialState = {
 }
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FOLLOW:
+        case FOLLOW_UNFOLLOW:
             return {
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return { ...u, followed: true }
+                        return { ...u, followed: action.act }
                     }
                     return u
 
                 })
             }
 
-        case UNFOLLOW:
-            return {
-                ...state,
-
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return { ...u, followed: false }
-                    }
-                    return u
-
-                })
-            }
         case SET_USERS: {
             return { ...state, users: action.users }
         }
@@ -77,57 +64,33 @@ const usersReducer = (state = initialState, action) => {
 }
 
 
-export const togleIsFetching = (isFetching) => ({ type: TOGLE_IS_FETCHING, isFetching })
-
 export const followingProgress = (isFetching, userId) => ({ type: TOGLE_IS_FOLLOWING_IN_PROGRESS, isFetching, userId })
 
-export const getUsers = (currentPage, pageSize) => {
-
-    return (dispatch) => {
-        dispatch(togleIsFetching(true))
-
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
-            dispatch(setUsers(data.items))
-            dispatch(togleIsFetching(false))
-            dispatch(setTotalUserCount(data.totalCount))
-            dispatch(setCurrentPage(currentPage))
-        })
-    }
+export const getUsers = (currentPage, pageSize) =>  async (dispatch) => {
+        dispatch({ type: TOGLE_IS_FETCHING, isFetching:true })
+        let data = await usersAPI.getUsers(currentPage, pageSize)
+        dispatch({ type: SET_USERS, users:data.items })
+        dispatch({ type: TOGLE_IS_FETCHING, isFetching:false })
+        dispatch({ type: SET_TOTAL_COUNT, totalCount:data.totalCount})
+        dispatch({ type: SET_CURRENT_PAGE, currentPage:currentPage })
 }
 
-export const setTotalUserCount = (totalCount) => ({ type: SET_TOTAL_COUNT, totalCount })
-export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage })
-export const followSuccess = (userId) => ({ type: FOLLOW, userId })
-export const unfollowSuccess = (userId) => ({ type: UNFOLLOW, userId })
-export const setUsers = (users) => ({ type: SET_USERS, users })
 
-export const follow = (userId) => {
-
-    return (dispatch) => {
-        dispatch(followingProgress(true, userId))
-        usersAPI.follow(userId).then(resultCode => {
-            dispatch(followingProgress(false, userId))
-            if (resultCode === 0) {
-                dispatch(followSuccess(userId))
-            }
+export const followUnfollowFlou = (userId, act) => async (dispatch) => {
+    dispatch(followingProgress(true, userId))
+    if (act === true) {
+        let resultCode = await usersAPI.follow(userId)
+        dispatch(followingProgress(false, userId))
+        if (resultCode === 0) {
+            dispatch({ type: FOLLOW_UNFOLLOW, userId, act })
         }
-        )
     }
-}
-export const test = () => ()=>{
-
-}
-export const unfollow = (userId) => {
-
-    return (dispatch) => {
-        dispatch(followingProgress(true, userId))
-        usersAPI.unfollow(userId).then(resultCode=>{
-            dispatch(followingProgress(false, userId))
-                if (resultCode === 0){
-                    dispatch(unfollowSuccess(userId))
-                }
-            }
-        )
+    else {
+        let resultCode = await usersAPI.unfollow(userId)
+        dispatch(followingProgress(false, userId))
+        if (resultCode === 0) {
+            dispatch({ type: FOLLOW_UNFOLLOW, userId, act })
+        }
     }
 }
 export default usersReducer

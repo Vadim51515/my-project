@@ -4,6 +4,7 @@ import styles from './Users.module.css';
 import StandartUser from "./StandardIconProfile.png"
 import { NavLink } from 'react-router-dom';
 import { usersAPI } from './../../api/api';
+import Paginator from '../Paginator/Paginator';
 let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
     let pages = []
@@ -14,12 +15,7 @@ let Users = (props) => {
     return (
         <div>
         
-            {pages.map(rez => (
-                <span 
-                style={{cursor:"pointer", marginLeft:10}}
-                className={(props.currentPage === rez) && styles.selectedPage}
-                onClick={(e)=>{props.onPageChanged(rez);}}>{rez}</span>
-            ))}
+            <Paginator totalUserCount={props.totalUserCount} pageSize={props.pageSize} currentPage={props.currentPage} onPageChanged={props.onPageChanged} />
             <div>
 
             </div>
@@ -38,7 +34,7 @@ let Users = (props) => {
                         <div>
                             {u.followed 
                             ?<button disabled={props.followingInProgress.some(id => id === u.id )} onClick={() => { 
-                                props.unfollow(u.id)
+                                props.followUnfollowFlou(u.id, false)
                                 // props.followingProgress(true, u.id)
                                 // usersAPI.unfollow(u.id).then(resultCode=>{
                                 //     props.followingProgress(false, u.id)
@@ -50,7 +46,7 @@ let Users = (props) => {
                                  }}>Unfollow</button>
                             
                             : <button disabled={props.followingInProgress.some(id => id === u.id )} onClick={() => {  
-                                props.follow(u.id)
+                                props.followUnfollowFlou(u.id, true)
                             //     props.followingProgress(true, u.id)
                             //     usersAPI.follow(u.id).then(resultCode=>{
                             //         props.followingProgress(false, u.id)

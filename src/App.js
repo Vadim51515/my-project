@@ -1,10 +1,7 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter, Route, withRouter } from 'react-router-dom';
+import React from 'react';
+import {Route, withRouter } from 'react-router-dom';
 import './App.css';
-import Dialogs from './Components/Dialogs/Dialogs';
-import Header from './Components/Header/Header';
 import NavBar from './Components/NavBar/NavBar';
-import Profile from './Components/Profile/Profile';
 import News from './Components/News/News';
 import Music from './Components/Music/Music';
 import Setings from './Components/Setings/Setings';
