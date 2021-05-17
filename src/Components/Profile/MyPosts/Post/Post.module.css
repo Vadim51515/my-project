@@ -1,0 +1,14 @@
+.post{
+    width: 20%;
+    height: 100%;
+    background-color: bisque;
+    border-radius: 4px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10PX;
+}
+.like {
+    width: 60%;
+    background-color: chartreuse;
+    border-radius: 4px;
+}

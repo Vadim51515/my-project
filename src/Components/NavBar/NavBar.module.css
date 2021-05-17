@@ -1,0 +1,21 @@
+.nav{
+  grid-area: n;
+  background: gray;
+  border-radius: 4px;
+}
+.item{
+  text-decoration: none;
+  color: white;
+  margin: 15PX;
+
+}
+.NavLink {
+  text-decoration: none;
+}
+.active{
+  color: rgb(11, 184, 112);
+  
+}
+.namesFriends{
+  margin: 5px;
+}
