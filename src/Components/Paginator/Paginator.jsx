@@ -22,9 +22,10 @@ let Paginator = (props) => {
                 {pages 
                     .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                     .map(rez => (
-                        <span
+                        <span key={rez}
                             style={{ cursor: "pointer", marginLeft: 10 }}
-                            className={(props.currentPage === rez) && styles.selectedPage}
+                            className={`${styles.blef} ${props.currentPage === rez  && styles.selectedPage }`}
+                            // className={(props.currentPage === rez) && styles.selectedPage}
                             onClick={(e) => { props.onPageChanged(rez); }}>{rez}</span>
 
                     ))}

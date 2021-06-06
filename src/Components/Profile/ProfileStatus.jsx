@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import styles from './ProfileStatus.module.css';
-import { updateStatus } from './../../redux/Profile_Reducer';
+
 class ProfileStatus extends React.Component {
     state = {
         editMode:false,

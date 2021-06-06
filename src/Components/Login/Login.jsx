@@ -1,12 +1,12 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { required } from './../../Utils/validators';
-import { Input } from './../Common/Preloader/FormsControls/FormsConrols';
+import { CreateField, Input } from './../Common/Preloader/FormsControls/FormsConrols';
 import { connect } from 'react-redux';
 import { login } from './../../redux/Auth_Reducer';
 import { Redirect } from 'react-router-dom';
 import styles from '../Common/Preloader/FormsControls/FormsControls.module.css';
-    const LoginForm = ({handleSubmit, error}) =>{
+    const LoginForm = ({handleSubmit, error, captchaUrl}) =>{
         return (
             <form onSubmit={handleSubmit}>
                 <div>
@@ -18,9 +18,11 @@ import styles from '../Common/Preloader/FormsControls/FormsControls.module.css';
                 <div>
                     <Field component={Input}  name={"rememberMe"} type={"checkbox"} /> remember me
                 </div>
+                {captchaUrl && <img src={captchaUrl} alt="Capcha" />}
+                {captchaUrl && CreateField('Symbols from image', 'captcha', [required], Input, {})}
                {error &&
                <div className={styles.formSummaryError}>
-                    ERROR!!!
+                    {error}
                 </div>
     }
                 <div>
@@ -40,16 +42,18 @@ const LoginReduxForm =  reduxForm({
          return <Redirect to={'/profile'}/>
       }
       const onSubmit = (formData) =>{
-          props.login(formData.email, formData.password,formData.rememberMe)
+          props.login(formData.email, formData.password,formData.rememberMe, formData.captcha)
       }
     return (
         <div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
         </div>
     )
 }
 const mapStateToProps = (state) =>({
-    isAuth:state.auth.isAuth
+    isAuth:state.auth.isAuth,
+    captchaUrl:state.auth.captchaUrl,
+
 })
 export default connect(mapStateToProps, {login})(Login);

@@ -1,14 +1,13 @@
 import React from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
-import { addPostActionCreator, ubdateNewPostActionCreator } from './../../../redux/Profile_Reducer';
 import { Field, reduxForm } from 'redux-form';
 import { maxLengthCreator, required } from './../../../Utils/validators';
 import { Textarea } from './../../Common/Preloader/FormsControls/FormsConrols';
 const maxLengthCreator10 = maxLengthCreator(10)
 const MyPosts = React.memo((props) => {
     let postelement = props.postData.map(e =>
-        <div>
+        <div key={e.id}>
             <Post message={e.message} like={e.like} />
             <hr />
         </div>)

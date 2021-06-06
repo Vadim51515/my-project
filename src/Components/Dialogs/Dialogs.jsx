@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './Dialogs.module.css';
 import Message from './Message/Message';
 import DialogItem from './DialogItem/DialogItem';
-import { addMessageActionCreator, ubdateNewMessagetActionCreator } from '../../redux/Dialogs_Reducer';
 import { Redirect } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { Textarea } from '../Common/Preloader/FormsControls/FormsConrols';
@@ -10,10 +9,10 @@ import { maxLengthCreator, required } from './../../Utils/validators';
 const maxLengthCreator50 = maxLengthCreator(50)
 const Dialogs = (props) => {
     let DialogsElements = props.DialogsData.map(d =>
-        <DialogItem name={d.name} id={d.id} />
+        <DialogItem name={d.name} id={d.id} key={d.id} />
     )
     let MessagesElements = props.MessageData.map(m =>
-        <Message message={m.message} />)
+        <Message message={m.message} key={m.id} />)
 
     if (props.isAuth === false) {
         return <Redirect to='./login'></Redirect>

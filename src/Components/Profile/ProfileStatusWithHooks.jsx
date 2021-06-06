@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from 'react';
-import styles from './ProfileStatus.module.css';
-import { updateStatus } from '../../redux/Profile_Reducer';
-const ProfileStatusWithHooks = (props) => {
+
+const ProfileComponentWithHooks = (props) => {
   const [editMode,setEditMode] = useState(false)
   const [status, setStatus] = useState(props.status)
 
@@ -11,7 +10,8 @@ const ProfileStatusWithHooks = (props) => {
         return (
 
             <div>
-                {editMode
+                {props.isOwner &&
+                editMode
                 ?
                  <input autoFocus={true} 
                  value={status} 
@@ -34,4 +34,4 @@ const ProfileStatusWithHooks = (props) => {
         )
     }
 
-export default ProfileStatusWithHooks;
+export default ProfileComponentWithHooks;

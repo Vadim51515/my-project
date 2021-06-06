@@ -1,10 +1,8 @@
 import React from 'react';
-import * as  axios from 'axios';
 import { connect } from 'react-redux';
 import Preloader from '../Common/Preloader/Preloader';
-import {setUsers, followUnfollowFlou, setCurrentPage, setTotalUserCount, togleIsFetching, followingProgress, getUsers } from './../../redux/Users_Reducer';
+import {followUnfollowFlou, followingProgress, getUsers } from './../../redux/Users_Reducer';
 import Users from './Users';
-import { usersAPI } from './../../api/api';
 import { withAuthRedirect } from './../Hoc/withAuthRedirect';
 import { compose } from 'redux';
 import { getPageSize, GetUsers, getTotalUserCount, getCurrentPage, getIsFetching,getFollowingInProgress} from './../../redux/Users-selector';

@@ -1,9 +1,6 @@
 import React from 'react';
-import * as  axios from 'axios';
-import styles from './Users.module.css';
 import StandartUser from "./StandardIconProfile.png"
 import { NavLink } from 'react-router-dom';
-import { usersAPI } from './../../api/api';
 import Paginator from '../Paginator/Paginator';
 let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
@@ -11,14 +8,11 @@ let Users = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-    console.log(  props.users);
+    // console.log(  props.users);
     return (
         <div>
         
             <Paginator totalItemsCount={props.totalUserCount} pageSize={props.pageSize} currentPage={props.currentPage} onPageChanged={props.onPageChanged} displayedPages={15} />
-            <div>
-
-            </div>
             {
 
                props.users.map(u => <div key={u.id}>
@@ -26,6 +20,7 @@ let Users = (props) => {
                         <div>
                             <NavLink to={'profile/' + u.id}>
                             <img 
+                            alt="user icon"
                             style={{width:60}} 
                             src={u.photos.small != null ? u.photos.small : StandartUser}>
                             </img>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { Redirect, Route, withRouter } from 'react-router-dom';
 import './App.css';
 import NavBar from './Components/NavBar/NavBar';
 import News from './Components/News/News';
@@ -13,7 +13,6 @@ import { Component } from 'react';
 import { compose } from 'redux';
 import { initialize } from './redux/App-reducer';
 import Preloader from './Components/Common/Preloader/Preloader';
-import { Suspense } from 'react';
 import { withSuspense } from './Components/Hoc/withSuspense';
 
 // import ProfileContainer from './Components/Profile/ProfileContainer';
@@ -22,8 +21,16 @@ const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileCo
 const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'));
 
 class App extends Component {
+  catchAllUnhandledErrors = (promiseRejectionEvent) => {
+    alert("some error occuruded")
+    console.log(promiseRejectionEvent);
+  }
   componentDidMount() {
     this.props.initialize()
+    window.addEventListener("unhandledrejection",this.catchAllUnhandledErrors)
+  }
+  componentWillUnmount() {
+    window.addEventListener("unhandledrejection",this.catchAllUnhandledErrors)
   }
   render() {
     if (!this.props.initialized) {
@@ -41,6 +48,8 @@ class App extends Component {
           <Route path='/setings' render={() => <Setings />} />
           <Route path='/users' render={() => <UsersContainer />} />
           <Route path='/login' render={() => <Login />} />
+          <Route path='/' render={() => <Redirect to='/profile' />} />
+          {/* <Route path='*' render={() => <div><h1>404. Page not found</h1></div>} /> */}
         </div>
       </div>
     );

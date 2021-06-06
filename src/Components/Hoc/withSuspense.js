@@ -1,6 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { Suspense } from 'react';
 import Preloader from '../Common/Preloader/Preloader';
 
