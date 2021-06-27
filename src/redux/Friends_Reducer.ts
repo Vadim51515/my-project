@@ -5,7 +5,7 @@ let initialState = {
             {id: 1,name: "Filin"},
         ]
     }
-const friendsReducer = (state = initialState, action) =>{
+const friendsReducer = (state = initialState, action:any) =>{
 
 
     return state

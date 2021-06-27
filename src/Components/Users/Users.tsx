@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { FC } from 'react';
 import StandartUser from "./StandardIconProfile.png"
 import { NavLink } from 'react-router-dom';
 import Paginator from '../Paginator/Paginator';
-let Users = (props) => {
+import { UserType } from '../../types/types';
+type PropsType = {
+    totalUserCount:number
+    pageSize:number
+    currentPage:number
+    users:Array<UserType>
+    followingInProgress: Array<number>
+    displayedPages?:number
+
+    onPageChanged:(leftPortionPageNumber:number) => void
+    followUnfollowFlou:(id:number, followUnfollow:boolean) => void
+}
+let Users: FC<PropsType> = (props) => {
     let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -11,10 +23,8 @@ let Users = (props) => {
     // console.log(  props.users);
     return (
         <div>
-        
             <Paginator totalItemsCount={props.totalUserCount} pageSize={props.pageSize} currentPage={props.currentPage} onPageChanged={props.onPageChanged} displayedPages={15} />
             {
-
                props.users.map(u => <div key={u.id}>
                     <span>
                         <div>

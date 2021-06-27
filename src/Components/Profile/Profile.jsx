@@ -26,14 +26,13 @@ const Profile = (props) => {
     const onSubmit = async (formData) =>{
       const result =  await props.saveProfile(formData)
       if (result !== 1) {
-       setEditMode(false)
-          
+       setEditMode(false)      
       }
-
     }
     const ProfileData = () => {
         return (
             <div className={styles.anket}>
+                    <audio src={'../Karina.mp3'}/>
                 <h3> {props.profile.fullName}</h3>
                {props.isOwner && <button onClick={(e) => { setEditMode(true) }}>Change profile info</button>}
                 <div className={styles.statusBox}>
