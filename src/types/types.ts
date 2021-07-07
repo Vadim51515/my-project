@@ -15,11 +15,24 @@ export type PhotosType = {
 }
 
 export type UserProfileType = {
-    userId: number
+    userId: number 
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
-    contacts: {
+    contacts: ContactsType
+    photos: PhotosType
+    aboutMe:string
+}
+export type ProfileType = {
+    userId: number 
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+    photos: PhotosType
+    aboutMe:string
+}
+export type ContactsType = {
         github: string
         vk: string
         facebook: string
@@ -28,10 +41,8 @@ export type UserProfileType = {
         website: string
         youtube: string
         mainLink: string
-    }
-    photos: PhotosType
 }
-export type GetUserType = {
+export type GetItemsType = {
     items: Array<UserType>
     totalCount:number
     error:string

@@ -1,17 +1,7 @@
-const ADD_MESSAGE = "ADD-MESSAGE"
-type InitialStateType = {
-    MessageData:Array<
-    {
-        id:number
-        message:string
-    }> 
-    DialogsData:Array<
-    {
-        id:string
-        name:string
-    }>  
-}
-let initialState:InitialStateType ={
+import { Dispatch } from 'redux';
+import { BaseThunkType, InferActionsTypes } from "./redux-store"
+import { reset } from 'redux-form';
+let initialState ={
         MessageData: [
             { id: 1, message: "Vadim hello" },
             { id: 2, message: "Andrey hello" },
@@ -28,24 +18,37 @@ let initialState:InitialStateType ={
             { id: "valera", name: "Valera" },
             { id: "sveta", name: "Sveta" },
         ],
+        newMessageText:""
     }
-    type ActionType = {
-        type: typeof ADD_MESSAGE 
-        newMessageBody: string
-    }
- const dialogsReducer = (state: InitialStateType = initialState, action:ActionType):InitialStateType =>{
+
+ const dialogsReducer = (state: InitialStateType = initialState, action:ActionTypes):InitialStateType =>{
     switch (action.type) {
         
-        case ADD_MESSAGE:
+        case "Dialogs_Reducer/ADD_MESSAGE":
             let newMessage = action.newMessageBody
             return{
                 ...state,
-                MessageData:[...state.MessageData, {id:6,message: newMessage}]
+                MessageData:[...state.MessageData, {id:6,message: newMessage}],
+                newMessageText:""
             }
         default:
             return state
+        }
     }
+export const actions = {
+    addMessageCreator: (newMessageBody:string) =>({type: "Dialogs_Reducer/ADD_MESSAGE", newMessageBody} as const)     
 }
-export const addMessageActionCreator = (newMessageBody:string) =>({type: ADD_MESSAGE, newMessageBody})     
+export const addMessage = (newMessageBody:string):ThunkType  => async (dispatch) => {
+        dispatch(actions.addMessageCreator(newMessageBody))
+        // @ts-ignore
+        dispatch(reset('dialogAddMessageForm'))
+}
 
 export default dialogsReducer
+
+export type InitialStateType = typeof initialState
+
+type ActionTypes = InferActionsTypes<typeof actions>
+
+
+type ThunkType = BaseThunkType<ActionTypes> 

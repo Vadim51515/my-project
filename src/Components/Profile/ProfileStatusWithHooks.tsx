@@ -1,6 +1,13 @@
 import React, { useState,useEffect } from 'react';
 
-const ProfileComponentWithHooks = (props) => {
+type PropsType = {
+    status:string
+    isOwner:boolean
+
+    updateStatus: (status:string) => void 
+}
+
+const ProfileComponentWithHooks: React.FC<PropsType> = (props) => {
   const [editMode,setEditMode] = useState(false)
   const [status, setStatus] = useState(props.status)
 
@@ -25,13 +32,9 @@ const ProfileComponentWithHooks = (props) => {
                 :
                 <span onClick={(e)=>{setEditMode(true)}}>{props.status ||  "Status is not defined"} </span>
                 }
-                   
-  
-                    
-
             </div>
-
         )
     }
 
 export default ProfileComponentWithHooks;
+ 

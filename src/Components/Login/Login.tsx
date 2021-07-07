@@ -1,7 +1,7 @@
 import React from 'react';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 import { required } from '../../Utils/validators';
-import { CreateField, Input} from '../Common/Preloader/FormsControls/FormsConrols';
+import { CreateField, GetStringKeys, Input} from '../Common/Preloader/FormsControls/FormsConrols';
 import { connect } from 'react-redux';
 import { login } from '../../redux/Auth_Reducer';
 import { Redirect } from 'react-router-dom';
@@ -13,11 +13,11 @@ type LoginFormOwnProps = {
 const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps> = ({ handleSubmit, error, captchaUrl }) => {
     return (
         <form onSubmit={handleSubmit}>
-            {CreateField<LoginFomValuesTypeKeys>("Email", "email", [required], Input, {}, undefined)}
-            {CreateField<LoginFomValuesTypeKeys>("Password", "password", [required], Input, { type: "password" }, undefined)}
-            {CreateField<LoginFomValuesTypeKeys>(undefined, "rememberMe", [], Input, { type: 'checkbox' }, "remember Me")}
+            {CreateField<LoginFormValuesTypeKeys>("Email", "email", [required], Input, {}, undefined)}
+            {CreateField<LoginFormValuesTypeKeys>("Password", "password", [required], Input, { type: "password" }, undefined)}
+            {CreateField<LoginFormValuesTypeKeys>(undefined, "rememberMe", [], Input, { type: 'checkbox' }, "remember Me")}
             {captchaUrl && <img src={captchaUrl} alt="Capcha" />}
-            {captchaUrl && CreateField<LoginFomValuesTypeKeys>('Symbols from image', 'captcha', [required], Input, {}, undefined)}
+            {captchaUrl && CreateField<LoginFormValuesTypeKeys>('Symbols from image', 'captcha', [required], Input, {}, undefined)}
             {error &&
                 <div className={styles.formSummaryError}>
                     {error}
@@ -35,7 +35,7 @@ export type LoginFormValuesType = {
     password: string
     email: string
 }
-type LoginFomValuesTypeKeys = Extract <keyof LoginFormValuesType, string>
+type LoginFormValuesTypeKeys = GetStringKeys<LoginFormValuesType>
 
 const LoginReduxForm = reduxForm<LoginFormValuesType, LoginFormOwnProps>({ form: 'login' })(LoginForm)
 

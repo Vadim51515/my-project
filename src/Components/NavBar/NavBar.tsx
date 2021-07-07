@@ -1,7 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './NavBar.module.css';
-const NavBar = (props) => {
+import Friends from './Friends/Friends';
+
+type PropsType = {
+  
+}
+
+const NavBar = (props:PropsType) => {
   return (
     <nav className={styles.nav}>
       <div className={styles.item}><NavLink style={{ textDecoration: 'none' }} activeClassName={styles.active} to='/profile'>Profile</NavLink></div>
@@ -12,7 +18,7 @@ const NavBar = (props) => {
       <div className={styles.item}><NavLink style={{ textDecoration: 'none' }} activeClassName={styles.active} to='/users'>Users</NavLink></div>
       <div><h3>Friends</h3>
         <div className={styles.namesFriends}>
-         {/* <Friends /> */}
+         <Friends />
         </div>
       </div>
     </nav>

@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from './Post.module.css';
-const Post = (props:{
-    message:string 
-    like:number}) => {
+type PropsType = {
+    message:string
+    like:number
+}
+const Post: React.FC<PropsType> = (props) =>{
     return (
         <div className={styles.post}>
             New message: "{props.message}"

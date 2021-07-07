@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GetUserType, UserProfileType } from '../types/types';
+import { GetItemsType, UserProfileType } from '../types/types';
 
 
 const instance = axios.create({
@@ -12,7 +12,7 @@ const instance = axios.create({
 
 export const usersAPI = {
     getUsers(currentPage = 1, pageSize = 1) {
-        return instance.get<GetUserType>(`users?page=${currentPage}&count=${pageSize}`, {
+        return instance.get<GetItemsType>(`users?page=${currentPage}&count=${pageSize}`, {
         }).then(response => {
                 return response.data
             })                  

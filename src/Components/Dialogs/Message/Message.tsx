@@ -1,6 +1,10 @@
 import React from 'react';
 import styles from '../Dialogs.module.css';
-const Message = (props) => {
+
+type PropsType = {
+    message:string
+}
+const Message:React.FC<PropsType> = (props) => {
     return (
         <div className={styles.message}>
             {props.message}

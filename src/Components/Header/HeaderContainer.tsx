@@ -1,7 +1,9 @@
 import React from 'react';
 import Header from './Header';
 import { connect } from 'react-redux';
-class HeaderContainer extends React.Component {
+import { AppStateType } from '../../redux/redux-store';
+type MapPropsType = ReturnType<typeof mapStateToProps>
+class HeaderContainer extends React.Component<MapPropsType> {
   
     render() {
         return (
@@ -9,7 +11,7 @@ class HeaderContainer extends React.Component {
         )
     }
 }
-const mapStateToProps = (state) =>({
+const mapStateToProps = (state:AppStateType) =>({
     isAuth:state.auth.isAuth, 
     login:state.auth.login
 })
