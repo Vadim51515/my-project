@@ -6,16 +6,18 @@ import { InjectedFormProps, reduxForm } from 'redux-form';
 import { Textarea } from '../Common/Preloader/FormsControls/FormsConrols';
 import s from '../Common/Preloader/FormsControls/FormsControls.module.css';
 import { UserProfileType } from '../../types/types';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProfileSelector, getStatusSelector } from '../Selectors/ProfileSelectors';
 
 type PropsType = {
-    profile:UserProfileType| null
     isOwner:boolean
-    status:string
-
-    updateStatus: (status:string) => void 
 }
 type ProfileKeysType = GetStringKeys<UserProfileType>
-const ProfileDataForm: React.FC<InjectedFormProps<UserProfileType, PropsType> & PropsType> = ({ profile, handleSubmit, error, ...props }) => {
+const ProfileDataForm: React.FC<InjectedFormProps<UserProfileType, PropsType> & PropsType> = ({handleSubmit, error, ...props }) => {
+    const profile = useSelector(getProfileSelector)
+    const status = useSelector(getStatusSelector)
+    
+    const dispatch = useDispatch()
     return (
         <form onSubmit={handleSubmit} className={styles.anket}>
             <h3>Full name: {CreateField<ProfileKeysType>('Full name', 'fullName', [], Input, {}, undefined)}</h3>
@@ -28,8 +30,6 @@ const ProfileDataForm: React.FC<InjectedFormProps<UserProfileType, PropsType> & 
             <div className={styles.statusBox}>
                 <p style={{ marginRight: 10 }}>Статус:</p>
                 <ProfileComponentWithHooks
-                    status={props.status}
-                    updateStatus={props.updateStatus}
                     isOwner={props.isOwner} />
             </div>
             <div style={{ display: "block" }}>

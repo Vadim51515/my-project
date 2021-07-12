@@ -1,4 +1,3 @@
-import { Dispatch } from 'redux';
 import { BaseThunkType, InferActionsTypes } from "./redux-store"
 import { reset } from 'redux-form';
 let initialState ={

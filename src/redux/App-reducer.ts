@@ -1,4 +1,3 @@
-import { Dispatch } from 'redux';
 import { getUserData } from './Auth_Reducer';
 import { BaseThunkType, InferActionsTypes } from './redux-store';
 let initialState = {

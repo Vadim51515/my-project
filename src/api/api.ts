@@ -11,8 +11,8 @@ const instance = axios.create({
 })
 
 export const usersAPI = {
-    getUsers(currentPage = 1, pageSize = 1) {
-        return instance.get<GetItemsType>(`users?page=${currentPage}&count=${pageSize}`, {
+    getUsers(currentPage = 1, pageSize = 1, term:string = '', friend: null | boolean ) {
+        return instance.get<GetItemsType>(`users?page=${currentPage}&count=${pageSize}&term=${term}` + (friend === null? '' : `&friend=${friend}`) , {
         }).then(response => {
                 return response.data
             })                  
@@ -70,7 +70,7 @@ export const profileAPI = {
     }
 }
 
-type UpdateStatusType = {
+export type UpdateStatusType = {
     resultCode:ResultCodeEnum
     messages:Array<string>
     data:{}

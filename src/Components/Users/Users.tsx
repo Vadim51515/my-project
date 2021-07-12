@@ -1,31 +1,52 @@
-import React, { FC } from 'react';
+import React, { FC,useEffect } from 'react';
 import StandartUser from "./StandardIconProfile.png"
 import { NavLink } from 'react-router-dom';
 import Paginator from '../Paginator/Paginator';
-import { UserType } from '../../types/types';
+// import { UserType } from '../../types/types';
+import UserSearchForm from './UsersSearchForm';
+import { FilterType, getUsers } from '../../redux/Users_Reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTotalUserCount, GetUsers, getUsersFilter } from '../../redux/Users-selector';
+import { getPageSize, getCurrentPage, getFollowingInProgress } from './../../redux/Users-selector';
+import { followUnfollowFlou } from './../../redux/Users_Reducer';
 type PropsType = {
-    totalUserCount:number
-    pageSize:number
-    currentPage:number
-    users:Array<UserType>
-    followingInProgress: Array<number>
-    displayedPages?:number
-
-    onPageChanged:(leftPortionPageNumber:number) => void
-    followUnfollowFlou:(id:number, followUnfollow:boolean) => void
 }
-let Users: FC<PropsType> = (props) => {
-    let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
+export const Users: FC<PropsType> = (props) => {
+
+  const totalUserCount = useSelector(getTotalUserCount)
+  const pageSize = useSelector(getPageSize)
+  const currentPage = useSelector(getCurrentPage)
+  const users = useSelector(GetUsers)
+  const followingInProgress = useSelector(getFollowingInProgress)
+  const filter = useSelector(getUsersFilter)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getUsers(currentPage, pageSize, filter))
+  }, [])
+
+  const onPageChanged = (pageNumber:number) => {
+    dispatch(getUsers(pageNumber, pageSize, filter))
+  }
+  const onFilterChanged = (filter:FilterType) => {
+    dispatch(getUsers( 1,pageSize, filter))
+  }
+
+    let pagesCount = Math.ceil(totalUserCount / pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-    // console.log(  props.users);
+    const followUnfollow = (userId: number, act: boolean) => {
+      dispatch(followUnfollowFlou( userId, act))
+    }
     return (
         <div>
-            <Paginator totalItemsCount={props.totalUserCount} pageSize={props.pageSize} currentPage={props.currentPage} onPageChanged={props.onPageChanged} displayedPages={15} />
+            <Paginator totalItemsCount={totalUserCount} pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged} displayedPages={15} />
+            <UserSearchForm onFilterChanged={onFilterChanged}/>
             {
-               props.users.map(u => <div key={u.id}>
+               users.map(u => <div key={u.id}>
                     <span>
                         <div>
                             <NavLink to={'profile/' + u.id}>
@@ -38,28 +59,12 @@ let Users: FC<PropsType> = (props) => {
                         </div>
                         <div>
                             {u.followed 
-                            ?<button disabled={props.followingInProgress.some(id => id === u.id )} onClick={() => { 
-                                props.followUnfollowFlou(u.id, false)
-                                // props.followingProgress(true, u.id)
-                                // usersAPI.unfollow(u.id).then(resultCode=>{
-                                //     props.followingProgress(false, u.id)
-                                //         if (resultCode === 0){
-                                //             props.unfollow(u.id) 
-                                //         }
-                                //     }
-                                // )
+                            ?<button disabled={followingInProgress.some(id => id === u.id )} onClick={() => { 
+                              followUnfollow(u.id, false)
                                  }}>Unfollow</button>
                             
-                            : <button disabled={props.followingInProgress.some(id => id === u.id )} onClick={() => {  
-                                props.followUnfollowFlou(u.id, true)
-                            //     props.followingProgress(true, u.id)
-                            //     usersAPI.follow(u.id).then(resultCode=>{
-                            //         props.followingProgress(false, u.id)
-                            //         if (resultCode === 0){
-                            //             props.follow(u.id) 
-                            //         }
-                            //     }
-                            // )
+                            : <button disabled={followingInProgress.some(id => id === u.id )} onClick={() => {  
+                              followUnfollow(u.id, true)
                             }}>Follow</button>  }
                         </div>
                     </span>
@@ -73,13 +78,6 @@ let Users: FC<PropsType> = (props) => {
                             </div>
                         </span>
                         <span>
-                            <div>
-                                {/* {u.location.country} */}
-                            </div>
-                            <div>
-                                {/* {u.location.city} */}
-                            </div>
-
                         </span>
                     </span>
                 </div>)
@@ -88,4 +86,5 @@ let Users: FC<PropsType> = (props) => {
     )
 
 }
-export default Users
+
+export default Users 

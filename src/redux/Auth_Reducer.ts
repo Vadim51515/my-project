@@ -1,6 +1,5 @@
 import { FormAction, stopSubmit } from "redux-form"
 import { authAPI, ResultCodeEnum, ResultCodeForCaptchaEnum, securityAPI } from "../api/api"
-import { Dispatch } from 'redux';
 import { BaseThunkType, InferActionsTypes } from "./redux-store";
 
 let initialState = {
